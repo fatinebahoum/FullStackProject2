@@ -8,27 +8,26 @@ services:
 
   # Spring Boot App Service
   spring-app:
-    image: fatinebahoum/backenddockerimage
+    image: fatinebahoum/springdockerimage
     ports:
       - "8080:8080"
     depends_on:
-      - postgres
+      - mysql
     networks:
       - my-network
 
   # MySQL Service
-  # PostgreSQL Service
-  postgres:
-    image: postgres
+  mysql:
+    image: mysql
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: fullstack
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: fullstack
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: mysql
     ports:
-      - "5433:5433"
+      - "3306:3306"
     networks:
       - my-network
-
 
 networks:
   my-network:
