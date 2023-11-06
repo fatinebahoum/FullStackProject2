@@ -1,0 +1,34 @@
+version: '3'
+services:
+  # React App Service
+  react-app:
+    image: fatinebahoum/frontenddockerimage
+    ports:
+      - "3000:3000"
+
+  # Spring Boot App Service
+  spring-app:
+    image: fatinebahoum/backenddockerimage
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    networks:
+      - my-network
+
+  # MySQL Service
+  # PostgreSQL Service
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: fullstack
+    ports:
+      - "5433:5433"
+    networks:
+      - my-network
+
+
+networks:
+  my-network:
